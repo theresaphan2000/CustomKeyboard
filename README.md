@@ -1,2 +1,2 @@
 # CustomKeyboard
-GUI that allows user to customize their keyboard layout
+Python code for creating a simple GUI that allows users to edit keymaping for their custom keyboard
