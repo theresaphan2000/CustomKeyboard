@@ -30,7 +30,9 @@ As of now, this repo is intended to show the progress done on the project and to
 
 ###### Log (Helping us keep track of where we):
 Seems that the most popular guides on making mechanical keyboards are recommending WinAVR, but it seems that the program is a bit outdated, and not as decked out as Atmelstudio 7. 
-
-Because our Atmegas is produced by Atmel, we're using that for programming our bootloader, however, we due to limited resource, we're going to have to hope that we could use the Pickit 3 as a compiler for our bootloader. So the process for the bootloader consists of **Downloading the USBaspLoader, modifying it for our selected microprocessor, and burning it onto the chip using Atmel Studio 7 and PicKit 3**.
+##### 11/21/2019:
+We discovered that we can't do anything with the Atmega chips while using the pickit 3. There are no compatibility in the two resources. We're going to see if we can use the arduinos to burn a bootloader onto the Atmega chip.
+##### 11/10/2019:
+Because our Atmegas is produced by Atmel, we're using that for programming our bootloader, however, due to the limited resource, we're going to have to hope that we could use the Pickit 3 as a compiler for our bootloader. So the process for the bootloader consists of **Downloading the USBaspLoader, modifying it for our selected microprocessor, and burning it onto the chip using Atmel Studio 7 and PicKit 3**.
 
 The provided Firmware which we'll need to flash onto the chip, after burning the bootloader, has a very nice template that makes it very intuitive to follow and configure. The plan is to be able to reconstruct the template so that we could **parse the text from the python app, and Rewrite it with the user's input**. However, we are still researching how to reupload the firmware onto the chip through a USB cable.
