@@ -1,5 +1,5 @@
 # CustomKeyboard
-This is repo is a compound collections of projects involved in the creation of a mechanical keyboard. Consists of AVR programing, and pythong GUI program to remap keys with ease.
+This is repo is a compound collections of projects involved in the creation of a mechanical keyboard. Consists of AVR programming, and python GUI program to remap keys with ease.
 ### Milestones
 
 - [x] Researching which compiler to use for programming the ATMega microprocessors
@@ -25,7 +25,7 @@ As of now, this repo is intended to show the progress done on the project and to
 [Bootloader](https://github.com/hsgw/USBaspLoader/tree/plaid)
 
 [AtmelStudio 7(for programing the ATMega)](https://www.microchip.com/mplab/avr-support/atmel-studio-7)
-
+ 
 ---
 
 ###### Log (Helping us keep track of where we):
@@ -40,4 +40,4 @@ The provided Firmware which we'll need to flash onto the chip, after burning the
 ##### 12/11/2019: 
 We decided to order the ATMEL 51 AVR USB ISP ASP Microcontroller Programmer in order to actually program the ATMEGA chip itself. In the meantime of waiting for it to arrive, we decided to try burn the UWSBaspLoader boot loader onto the MCU. After getting the bootloader onto the MCU, we will then flash the opensource QMK firmware.
 
-After doing so, we will then begin actually building a phsyical 4 key prototype of our keyboard. 
+After doing so, we will then begin actually building a phsyical 4 key prototype of our keyboard.
