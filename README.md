@@ -26,6 +26,7 @@ As of now, this repo is intended to show the progress done on the project and to
 
 [AtmelStudio 7(for programing the ATMega)](https://www.microchip.com/mplab/avr-support/atmel-studio-7)
  
+[Handwiring Keyboard Guide](https://beta.docs.qmk.fm/for-makers-and-modders/hand_wire)
 ---
 
 ###### Log (Helping us keep track of where we):
