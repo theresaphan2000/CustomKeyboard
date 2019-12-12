@@ -36,3 +36,8 @@ We discovered that we can't do anything with the Atmega chips while using the pi
 Because our Atmegas is produced by Atmel, we're using that for programming our bootloader, however, due to the limited resource, we're going to have to hope that we could use the Pickit 3 as a compiler for our bootloader. So the process for the bootloader consists of **Downloading the USBaspLoader, modifying it for our selected microprocessor, and burning it onto the chip using Atmel Studio 7 and PicKit 3**.
 
 The provided Firmware which we'll need to flash onto the chip, after burning the bootloader, has a very nice template that makes it very intuitive to follow and configure. The plan is to be able to reconstruct the template so that we could **parse the text from the python app, and Rewrite it with the user's input**. However, we are still researching how to reupload the firmware onto the chip through a USB cable.
+
+##### 12/11/2019: 
+We decided to order the ATMEL 51 AVR USB ISP ASP Microcontroller Programmer in order to actually program the ATMEGA chip itself. In the meantime of waiting for it to arrive, we decided to try burn the UWSBaspLoader boot loader onto the MCU. After getting the bootloader onto the MCU, we will then flash the opensource QMK firmware.
+
+After doing so, we will then begin actually building a phsyical 4 key prototype of our keyboard. 
