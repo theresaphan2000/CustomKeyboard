@@ -39,6 +39,6 @@ Because our Atmegas is produced by Atmel, we're using that for programming our b
 The provided Firmware which we'll need to flash onto the chip, after burning the bootloader, has a very nice template that makes it very intuitive to follow and configure. The plan is to be able to reconstruct the template so that we could **parse the text from the python app, and Rewrite it with the user's input**. However, we are still researching how to reupload the firmware onto the chip through a USB cable.
 
 ##### 12/11/2019: 
-We decided to order the ATMEL 51 AVR USB ISP ASP Microcontroller Programmer in order to actually program the ATMEGA chip itself. In the meantime of waiting for it to arrive, we decided to try burn the UWSBaspLoader boot loader onto the MCU. After getting the bootloader onto the MCU, we will then flash the opensource QMK firmware.
+We decided to order the ATMEL 51 AVR USB ISP ASP Microcontroller Programmer in order to actually program the ATMEGA chip itself. In the meantime of waiting for it to arrive, we decided attempt to burn the UWSBaspLoader boot loader onto the MCU through an Arduino board. After getting the bootloader onto the MCU, we will then flash the opensource QMK firmware.
 
 After doing so, we will then begin actually building a phsyical 4 key prototype of our keyboard.
