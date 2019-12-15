@@ -28,6 +28,7 @@ As of now, this repo is intended to show the progress done on the project and to
  
 [Handwiring Keyboard Guide](https://beta.docs.qmk.fm/for-makers-and-modders/hand_wire)
 
+[Understanding GMK](https://beta.docs.qmk.fm/for-a-deeper-understanding/understanding_qmk)
 ---
 
 ###### Log (Helping us keep track of where we):
