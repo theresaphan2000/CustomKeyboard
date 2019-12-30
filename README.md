@@ -1,5 +1,9 @@
 # CustomKeyboard
 This is repo is a compound collections of projects involved in the creation of a mechanical keyboard. Consists of AVR programming, and python GUI program to remap keys with ease.
+
+NOTE: The USBaspLoader is an open source bootloader that allows us to reprogram the MCU via USB connection rather than the programmer itself. All credit is also given to u/baerwolf. We simply adjusted the given files to match with our hardware, which was the USBtiny programmer and ATMEGA328P MCU. 
+[CusotmKeyboard Updated Bootloader](https://github.com/hsgw/USBaspLoader/tree/plaid)
+
 ### Milestones
 
 - [x] Researching which compiler to use for programming the ATMega microprocessors
