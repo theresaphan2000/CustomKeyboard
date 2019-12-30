@@ -30,6 +30,8 @@ As of now, this repo is intended to show the progress done on the project and to
 
 [Understanding GMK](https://beta.docs.qmk.fm/for-a-deeper-understanding/understanding_qmk)
 
+[AVR Pocket Programmer Guide]([Understanding GMK](https://beta.docs.qmk.fm/for-a-deeper-understanding/understanding_qmk)
+
 ---
 
 ###### Log (Helping us keep track of where we):
