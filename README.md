@@ -45,3 +45,8 @@ The provided Firmware which we'll need to flash onto the chip, after burning the
 We decided to order the ATMEL 51 AVR USB ISP ASP Microcontroller Programmer in order to actually program the ATMEGA chip itself. In the meantime of waiting for it to arrive, we decided attempt to burn the UWSBaspLoader boot loader onto the MCU through an Arduino board. After getting the bootloader onto the MCU, we will then flash the opensource QMK firmware.
 
 After doing so, we will then begin actually building a phsyical 4 key prototype of our keyboard.
+
+##### 12/30/2019: 
+Using the AVR Pocket Programmer, we connected the jumper to the coresponding ISP pins on the Arduino Uno which still had the ATMEGA328P attatched. Our initial difficulty was getting Windows to recognize the programmer, which we later realized was because of a faulty cable that came along with the programmer. We proceeded to use Zadig to install the needed drivers (libusb) for the device.
+
+To actually flash the USBaspLoader onto the MCU, we needed to be in the directory of the extracted folder. Initially, I used Ubuntu to do this but AVRDUDE was having difficulty recognizing the device. I then switched to Command Prompt and was able to succesfully flash the bootlader on using the make command, make flash, and make fuse.I also had to change a couple settings in the Makefile.inc file to fit with our corresponding hardware.
