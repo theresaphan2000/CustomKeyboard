@@ -1,8 +1,7 @@
 #!/usr/bin/env python
-
-from myStuff import *
+from interfaceVisuals import *
 
 def main():
-    getQMKDirect()
+
 
 main();
