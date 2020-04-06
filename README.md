@@ -1,4 +1,4 @@
-# CustomKeyboard
+
 This is repo is a compound collections of projects involved in the creation of a mechanical keyboard. Consists of AVR programming, and python GUI program to remap keys with ease.
 
 NOTE: The USBaspLoader is an open source bootloader that allows us to reprogram the MCU via USB connection rather than the programmer itself. All credit is also given to u/baerwolf. We simply adjusted the given files to match with our hardware, which was the USBtiny programmer and ATMEGA328P MCU. 
@@ -8,8 +8,8 @@ NOTE: The USBaspLoader is an open source bootloader that allows us to reprogram 
 ### Milestones
 
 - [x] Researching which compiler to use for programming the ATMega microprocessors
-- [ ] Make a testing code for the ATMega328p that registers a keypress (from a mechanical keyboard switch)
-  - _referencing the code from qmk_firmware_
+
+- [x]_referencing the code from qmk_firmware_
 - [ ] Create a working prototype for the testing code
 - [ ] Iterate the code to work for multiple key switches
 - [ ] Design a custom PCB for the phase two prototype
@@ -58,4 +58,7 @@ Using the AVR Pocket Programmer, we connected the jumper to the coresponding ISP
 
 To actually flash the USBaspLoader onto the MCU, we needed to be in the directory of the extracted folder. Initially, I used Ubuntu to do this but AVRDUDE was having difficulty recognizing the device. I then switched to Command Prompt and was able to succesfully flash the bootlader on using the make command, make flash, and make fuse.I also had to change a couple settings in the Makefile.inc file to fit with our corresponding hardware.
 ##### 3/07/2020: 
-Successfully created new keybaord directory using util/new_keyboard.sh commnad. 
+Successfully created new keybaord directory using util/new_keyboard.sh commnad.
+##### 4/5/2020: 
+All of keympas and files succesfully compiles. Flashed USBaspLoader onto 32U MCU, along with completed firmware flashing. 
+General and simple application was also updated using python, and I was able to retrieve users directory path to firmware folder. More implementation on program interface and editing c files will need to be done.  

@@ -1,1 +1,7 @@
-hello
+This is a ReadMe file for the simple GUI application that allows users to edit their keymapping. 
+Here is a description of the following files: 
+
+-ReadMe: What you're reading now...
+-interfaceFunctions.py: this file contains the functions that are and will be implemented in the interface
+-interfaceVisuals.py: this file contains all the visual interface code(where most of the tkinter program will be) 
+
