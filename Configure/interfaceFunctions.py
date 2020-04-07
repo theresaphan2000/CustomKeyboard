@@ -8,7 +8,8 @@ import os
 
 #firmware folder name(subjected to change)
 firmware = 'qmk_firmware'
-
+#Global variable for path
+global ULTIMATEPATH
 #root used in interfaceVisuals.py
 root = tk.Tk()  # needed " think of it as a base'
 
@@ -23,6 +24,8 @@ def changeToDir(path):
 def getDirectory():
     qmkdir = filedialog.askdirectory(parent=root, initialdir="/", title="Select your qmk_firmware directory: ")
     while os.path.basename(qmkdir) != firmware:
-        qmkdir = filedialog.askdirectory(mustexist=True, title="Select your qmk_firmware directory: ")
-        return qmkdir
+          qmkdir = filedialog.askdirectory(mustexist=True, title="Select your qmk_firmware directory: ")
+
+    ULTIMATEPATH = qmkdir;
+    return
 
