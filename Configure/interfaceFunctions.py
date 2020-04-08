@@ -1,20 +1,19 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import subprocess
 import tkinter as tk
 from tkinter import filedialog, Text
 import os
 #--------------------------------------------------------------------------------------------------
 
-
 #firmware folder name(subjected to change)
 firmware = 'qmk_firmware'
 #Global variable for path
-global ULTIMATEPATH
+ULTIMATEPATH = None
+
 # Global array for keymapping
 
 #root used in interfaceVisuals.py
 root = tk.Tk()  # needed " think of it as a base'
-
 
 # Function that stores user input for keymapping
 # def getKeys():
@@ -30,9 +29,10 @@ def makeHex(path):
 
 def getDirectory():
     qmkdir = filedialog.askdirectory(parent=root, initialdir="/", title="Select your qmk_firmware directory: ")
-    while os.path.basename(qmkdir) != firmware:
+    while os.path.basename(qmkdir) != firmware and qmkdir != '': #if doesnt return empty string
           qmkdir = filedialog.askdirectory(mustexist=True, title="Select your qmk_firmware directory: ")
 
-    ULTIMATEPATH = qmkdir;
+    global ULTIMATEPATH
+    ULTIMATEPATH = qmkdir
     return
 
