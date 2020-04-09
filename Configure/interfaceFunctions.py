@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import subprocess
+from tkinter import *
 import tkinter as tk
 from tkinter import filedialog, Text
 import os
@@ -8,7 +9,7 @@ import os
 #firmware folder name(subjected to change)
 firmware = 'qmk_firmware'
 #Global variable for path
-ULTIMATEPATH = None
+ULTIMATEPATH = 'hello'
 
 # Global array for keymapping
 
@@ -34,5 +35,8 @@ def getDirectory():
 
     global ULTIMATEPATH
     ULTIMATEPATH = qmkdir
+    dirBox = tk.Label(root, bg="black", fg="#97a4aa", text=ULTIMATEPATH, borderwidth=1.2, relief="sunken", font="Helvetica 11")#.grid(row=0, column=1 )
+
+    dirBox.pack()
     return
 

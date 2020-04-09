@@ -1,25 +1,44 @@
 #!/usr/bin/env python3
 from interfaceFunctions import *
+#
+class buttonAttributes(tk.Button):
+    def __init__(self,  frameRef,rx ,ry ,**kwargs):
 
-canvas = tk.Canvas(root, height=700, width=700, bg="#263D42")
-canvas.pack()  # needed fill, exapnd, a geometry manager
+        tk.Button.__init__(self, master=frameRef, **kwargs)
 
-frame = tk.Frame(root, bg="white")
-frame.place(relwidth=.8, relheight=.7, relx=.1, rely=.1)
+        self.config(padx=1, relief="solid", pady=1, fg="#97a4aa", bd=0, highlightthickness=0)
+        self.place(relwidth=.2, relheight=.2, relx=rx, rely=ry)
+        self.bind("<Enter>", self.on_enter)
+        self.bind("<Leave>", self.on_leave)
+
+    def on_enter(self, e):
+        self['bg']= "black"
+
+    def on_leave(self,e):
+        self['bg'] = "#293439"
 
 
 
-openDir = tk.Button(root, text="Open File", padx=10,
-                     pady=5, fg="white", bg="#263D42", command=getDirectory)
-openDir.pack()  # packs openFile
 
-# Border Label window
-dirBox = tk.Label(root, text=ULTIMATEPATH, borderwidth=1, relief="solid", font="Helvetica 32")
-dirBox.pack()
+def main():
+    root.title("hello")
+    root.geometry("500x200")
+    root.configure(background='#21292d')
+# # CANVAS
+#     canvas = tk.Canvas(root, height=200, width=500, bg="pink")
+#     canvas.grid(row=0, column=1)  # needed fill, exapnd, a geometry manager
+#     canvas.update()
 
-# Pull old contents of c file
-runApps = tk.Button(root, text="Run App", padx=10,
-                    pady=5, fg="white", bg="#263D42")
-runApps.pack()  # packs openFile
+#FRAME
+    frame = tk.Frame(root, bg="#293439")
+    frame.config(relief="solid", highlightthickness=1,highlightbackground="#97a4aa" )
+    frame.place(relwidth=.8, relheight=.7, relx=.1, rely=.1)
+    # Border Label window
 
-root.mainloop()
+    openDir = buttonAttributes(frame, .05, .2,  text="Show Folder", command=getDirectory)
+    newDir = buttonAttributes( frame, .5, .5, text="Show Folder", command=getDirectory)
+
+    root.mainloop()
+
+
+main()
