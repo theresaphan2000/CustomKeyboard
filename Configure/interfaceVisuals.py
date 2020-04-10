@@ -21,8 +21,9 @@ from interfaceFunctions import *
 
 def main():
     global root
-    dirScreen = pageOne(root, bg="#293439", relief="solid", highlightthickness=1,highlightbackground="#97a4aa")
-
+    dirScreen = pageOne(root)
+    # keyMap = pageTwo(root)
     root.mainloop()
+#     make tool bar
 
 main()

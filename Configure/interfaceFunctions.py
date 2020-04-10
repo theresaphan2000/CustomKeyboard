@@ -61,15 +61,21 @@ class buttonAttributes(tk.Button):
         self['bg'] = "#293439"
 
 
-#######################Page Classes#####################################
+#######################Page Classes 1#####################################
 class pageOne(tk.Frame):
-    def __init__(self, frameRoot, **kwargs):
+    def __init__(self, root, **kwargs):
         tk.Frame.__init__(self, root, **kwargs)
+        self.config(bg="#293439", relief="solid", highlightthickness=1, highlightbackground="#97a4aa")
         self.place(relwidth=.8, relheight=.7, relx=.1, rely=.1)
-        dirFrame = tk.LabelFrame(frameRoot, bg="#52606D", relief="sunken", bd=1)
-        dirFrame.place(relwidth=.5, relheight=.1, relx=.3, rely=.26)
+        dirFrame = tk.LabelFrame(self, bg="#52606D", relief="sunken", bd=1)
+        dirFrame.place(relwidth=.73, relheight=.2, relx=.25, rely=.2)
 
-        openDir = buttonAttributes(self, .05, .2, dirFrame, text="Show Folder", bg="#293439", command=lambda: getDirectory(dirFrame))
+        openDir = buttonAttributes(self, .05, .2, dirFrame, text="Show Folder:", bg="#293439", command=lambda: getDirectory(dirFrame))
+########################Page Classes 2 #####################################
+class pageTwo(tk.Frame):
+    def __init__(self, frameRoot, **kwargs):
+        root.geometry("600x600")
+        tk.Frame.__init__(self, root, **kwargs)
+        self.config(bg="#293439", relief="solid", highlightthickness=1, highlightbackground="#97a4aa")
+        self.place(relwidth=.8, relheight=.7, relx=.1, rely=.1)
 
-class pageTow(tk.Frame):
-    def __init__
