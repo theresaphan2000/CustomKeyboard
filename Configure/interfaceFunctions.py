@@ -4,21 +4,14 @@ from tkinter import *
 import tkinter as tk
 from tkinter import filedialog, Text
 import os
-
+from miscDef import *
 # --------------------------------------------------------------------------------------------------
-
-# firmware folder name(subjected to change)
-firmware = 'qmk_firmware'
-# Global variable for path
-qmkdir = ''
-
-# Global array for keymapping
 
 # root used in interfaceVisuals.py
 root = tk.Tk()  # needed " think of it as a base'
 root.title("hello")
 root.geometry("500x200")
-root.configure(background='#21292d')
+root.configure(background=color["root"])
 
 
 # Function that stores user input for keymapping
@@ -33,14 +26,13 @@ def makeHex(path):
 
 
 # function to check and allow user to select directory
-
 def getDirectory(dirFrame):
     global qmkdir
     qmkdir = filedialog.askdirectory(parent=root, initialdir="/", title="Select your qmk_firmware directory: ")
     while os.path.basename(qmkdir) != firmware and qmkdir != '':  # if doesnt return empty string
         qmkdir = filedialog.askdirectory(mustexist=True, title="Select your qmk_firmware directory: ")
-    dirLabel = tk.Label(dirFrame, pady=.1, text=qmkdir, bg="#52606D", fg="white", font="Helvetica 8").place(relx=0,
-                                                                                                            rely=0)
+    dirLabel = tk.Label(dirFrame, pady=.1, text=qmkdir, bg=color["hl"], fg="white", font="Helvetica 10").place(relx=.05,
+                                                                                                            rely=.02)
     return qmkdir
 
 
@@ -50,7 +42,7 @@ class buttonAttributes(tk.Button):
         tk.Button.__init__(self, master=frameRef, **kwargs)
 
         self.config(padx=1, relief="solid", pady=1, fg="#97a4aa", bd=0, highlightthickness=0)
-        self.place(relwidth=.2, relheight=.2, relx=rx, rely=ry)
+        self.place(relwidth=.06, relheight=.2, relx=rx, rely=ry)
         self.bind("<Enter>", self.on_enter)
         self.bind("<Leave>", self.on_leave)
 
@@ -58,24 +50,31 @@ class buttonAttributes(tk.Button):
         self['bg'] = "black"
 
     def on_leave(self, e):
-        self['bg'] = "#293439"
+        self['bg'] = color["fBg"]
 
+#
 
 #######################Page Classes 1#####################################
+
 class pageOne(tk.Frame):
     def __init__(self, root, **kwargs):
         tk.Frame.__init__(self, root, **kwargs)
-        self.config(bg="#293439", relief="solid", highlightthickness=1, highlightbackground="#97a4aa")
-        self.place(relwidth=.8, relheight=.7, relx=.1, rely=.1)
-        dirFrame = tk.LabelFrame(self, bg="#52606D", relief="sunken", bd=1)
-        dirFrame.place(relwidth=.73, relheight=.2, relx=.25, rely=.2)
+        self.config(bg=color["fBg"], relief="solid", highlightthickness=1, highlightbackground=color["hl"])
+        self.place(relwidth=3, relheight=.7, relx=-1, rely=.1)
 
-        openDir = buttonAttributes(self, .05, .2, dirFrame, text="Show Folder:", bg="#293439", command=lambda: getDirectory(dirFrame))
+        #frame holding directory path
+        dirFrame = tk.LabelFrame(self, bg=color["hl"], relief="sunken", bd=1)
+        dirFrame.place(relwidth=.25, relheight=.2, relx=.4, rely=.2)
+
+        openDir = buttonAttributes(self, .35, .2, dirFrame, text="Select Folder:", bg=color["fBg"], command=lambda: getDirectory(dirFrame))
 ########################Page Classes 2 #####################################
+
 class pageTwo(tk.Frame):
     def __init__(self, frameRoot, **kwargs):
-        root.geometry("600x600")
+        root.geometry("800x600")
         tk.Frame.__init__(self, root, **kwargs)
-        self.config(bg="#293439", relief="solid", highlightthickness=1, highlightbackground="#97a4aa")
-        self.place(relwidth=.8, relheight=.7, relx=.1, rely=.1)
+        self.config(bg=color["fBg"], relief="solid", highlightthickness=1, highlightbackground=color["hl"])
+        self.place(relwidth=3, relheight=.9, relx=-1, rely=.05)
+
+
 
