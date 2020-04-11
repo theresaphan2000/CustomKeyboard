@@ -6,7 +6,7 @@ from interfaceFunctions import *
 def main():
     global root
     dirScreen = pageOne(root)
-    keyMap = pageTwo(root)
+    #keyMap = pageTwo(root)
     root.mainloop()
 #     make tool bar
 

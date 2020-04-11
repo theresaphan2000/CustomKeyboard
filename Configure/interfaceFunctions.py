@@ -42,7 +42,9 @@ class buttonAttributes(tk.Button):
         tk.Button.__init__(self, master=frameRef, **kwargs)
 
         self.config(padx=1, relief="solid", pady=1, fg="#97a4aa", bd=0, highlightthickness=0)
-        self.place(relwidth=.06, relheight=.2, relx=rx, rely=ry)
+       # self.place(relwidth=.06, relheight=.2, relx=rx, rely=ry)
+        self.place(width=90, height=28, relx=rx, rely=ry)
+
         self.bind("<Enter>", self.on_enter)
         self.bind("<Leave>", self.on_leave)
 
@@ -64,7 +66,7 @@ class pageOne(tk.Frame):
 
         #frame holding directory path
         dirFrame = tk.LabelFrame(self, bg=color["hl"], relief="sunken", bd=1)
-        dirFrame.place(relwidth=.25, relheight=.2, relx=.4, rely=.2)
+        dirFrame.place(relwidth=.25, height=28, relx=.4, rely=.2)
 
         openDir = buttonAttributes(self, .35, .2, dirFrame, text="Select Folder:", bg=color["fBg"], command=lambda: getDirectory(dirFrame))
 ########################Page Classes 2 #####################################
@@ -75,6 +77,6 @@ class pageTwo(tk.Frame):
         tk.Frame.__init__(self, root, **kwargs)
         self.config(bg=color["fBg"], relief="solid", highlightthickness=1, highlightbackground=color["hl"])
         self.place(relwidth=3, relheight=.9, relx=-1, rely=.05)
-
+    
 
 
