@@ -9,7 +9,7 @@ NOTE: The USBaspLoader is an open source bootloader that allows us to reprogram 
 
 - [x] Researching which compiler to use for programming the ATMega microprocessors
 
-- [x]_referencing the code from qmk_firmware_
+- [x] referencing the code from qmk_firmware_
 - [ ] Create a working prototype for the testing code
 - [ ] Iterate the code to work for multiple key switches
 - [ ] Design a custom PCB for the phase two prototype
