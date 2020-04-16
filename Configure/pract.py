@@ -13,9 +13,10 @@ def main():
     photo = PhotoImage(file="buttonPic.png")
 
     btn = Button(root, text="hi", fg="white",activeforeground="white",image=photo, border=0, compound="center")
-    btn.image = photo
-    btn.pack()
+    #btn.image = photo
 
+    #btn.pack()
+    btn.grid(row=0, column=0)
     root.mainloop()
 
 
