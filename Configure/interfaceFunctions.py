@@ -31,31 +31,56 @@ def getDirectory(dirFrame):
     qmkdir = filedialog.askdirectory(parent=root, initialdir="/", title="Select your qmk_firmware directory: ")
     while os.path.basename(qmkdir) != firmware and qmkdir != '':  # if doesnt return empty string
         qmkdir = filedialog.askdirectory(mustexist=True, title="Select your qmk_firmware directory: ")
-    dirLabel = tk.Label(dirFrame, pady=.1, text=qmkdir, bg=color["hl"], fg="white", font="Helvetica 10").place(relx=.05,
+    dirLabel = tk.Label(dirFrame, pady=.1, text=qmkdir, bg=color["hl"], fg="#97a4aa", font="Helvetica 10").place(relx=.05,
                                                                                                             rely=.02)
     return qmkdir
+
+#function that calls next frame
+#def nextFrame():
+
 
 
 # Generic Button Class
 class buttonAttributes(tk.Button):
-    def __init__(self, frameRef,  rx, ry,widgetFrame,  **kwargs):
+    def __init__(self, frameRef,  rx, ry,  **kwargs):
         tk.Button.__init__(self, master=frameRef, **kwargs)
 
         self.config(padx=1, relief="solid", pady=1, fg="#97a4aa", bd=0, highlightthickness=0)
-       # self.place(relwidth=.06, relheight=.2, relx=rx, rely=ry)
         self.place(width=90, height=28, relx=rx, rely=ry)
 
         self.bind("<Enter>", self.on_enter)
         self.bind("<Leave>", self.on_leave)
 
     def on_enter(self, e):
-        self['bg'] = "black"
+        self['bg'] = "#312320"
 
     def on_leave(self, e):
         self['bg'] = color["fBg"]
 
-#
+    def keyButton(self):
+        self.loadimage = tk.PhotoImage(file="buttonPic.png")
+        self.roundedbutton = tk.Button(self, image=self.loadimage)
+        self.roundedbutton["bg"] = "white"
+        self.roundedbutton["border"] = 0
+        self.roudnedbutton.pack(side="top")
 
+
+
+#######################Page Base #########################################
+class mainFrame(tk.Tk):
+    def __init__(self, *args, **kwargs):
+        tk.Tk.__init__(self,*args,**kwargs)
+        container = tk.Frame(self)
+
+        container.grid(row=0, column=0, sticky="nsew")
+        self.frames = {}
+        frame = pageOne(container,self)
+        frame.grid(row=0, column=0, sticky="nsew")
+        self.show_frame(pageOne)
+
+        def show_frame(self, cont):
+            frame = self.frames[cont]
+            frame.tkraise()
 #######################Page Classes 1#####################################
 
 class pageOne(tk.Frame):
@@ -68,15 +93,21 @@ class pageOne(tk.Frame):
         dirFrame = tk.LabelFrame(self, bg=color["hl"], relief="sunken", bd=1)
         dirFrame.place(relwidth=.25, height=28, relx=.4, rely=.2)
 
-        openDir = buttonAttributes(self, .35, .2, dirFrame, text="Select Folder:", bg=color["fBg"], command=lambda: getDirectory(dirFrame))
+        openDir = buttonAttributes(self, .35, .2, text="Select Folder:", bg=color["fBg"], command=lambda: getDirectory(dirFrame))
+        next = buttonAttributes(self, .55, .7, text="Next", bg=color["fBg"], command=lambda: getDirectory(dirFrame))
+
 ########################Page Classes 2 #####################################
 
 class pageTwo(tk.Frame):
     def __init__(self, frameRoot, **kwargs):
-        root.geometry("800x600")
+        root.geometry("489x425")
         tk.Frame.__init__(self, root, **kwargs)
         self.config(bg=color["fBg"], relief="solid", highlightthickness=1, highlightbackground=color["hl"])
         self.place(relwidth=3, relheight=.9, relx=-1, rely=.05)
-    
+
+
+
+
+
 
 
