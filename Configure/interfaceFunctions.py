@@ -5,8 +5,9 @@ import tkinter as tk
 from tkinter import filedialog, Text
 import os
 from miscDef import *
-from PIL import Image, ImageTk
+
 # --------------------------------------------------------------------------------------------------
+
 
 # root used in interfaceVisuals.py
 root = tk.Tk()  # needed " think of it as a base'
@@ -37,6 +38,14 @@ def getDirectory(dirFrame):
         rely=.02)
     return qmkdir
 
+def keystroke(index):
+    global key
+    key[index] = input()
+    b[index].conjugate(text=key[index])
+    return key[index]
+
+
+
 
 # function that calls next frame
 # def nextFrame():
@@ -60,9 +69,9 @@ class buttonAttributes(tk.Button):
     def on_leave(self, e):
         self['bg'] = color["fBg"]
 
-    def addImage(self, r, c, photo):
+    def addImage(self, r, c, photo,num):
 
-        self.configure(fg="white", activeforeground="white", image=photo, border=0, compound="center")
+        self.configure(command=lambda :keystroke(num),fg="white", activeforeground="white", image=photo, border=0, compound="center", bg="#595959", activebackground="#595959")
         #self.grid(row=r, column=c)
         self.image = photo
         self.place(width=60, height=60, relx=r, rely=c)
@@ -107,10 +116,21 @@ class pageOne(tk.Frame):
 ########################Page Classes 2 #####################################
 class pageTwo(tk.Frame):
     def __init__(self, frameRoot, **kwargs):
-        root.geometry("489x425")
+        root.geometry("600x450")
+        root.resizable(False,False)
         tk.Frame.__init__(self, frameRoot, **kwargs)
         self.config(bg=color["fBg"], relief="solid", highlightthickness=1, highlightbackground=color["hl"])
         self.place(relwidth=3, relheight=.9, relx=-1, rely=.05)
 
-        img = ImageTk.PhotoImage(file="buttonPic.gif")
-        fuckOff = buttonAttributes(self,text="FuckOff").addImage(.5,.3,img)
+        img = PhotoImage(file="buttonPic.png")
+        x = .365
+        y = .1
+        b[0] = buttonAttributes(self,text=key[0]).addImage(x, y,img,0)
+        b[1] = buttonAttributes(self,text=key[1]).addImage(x+.043, y,img,1)
+        b[2] = buttonAttributes(self,text=key[2]).addImage(x+.086, y,img,2)
+        b[3] = buttonAttributes(self,text=key[3]).addImage(x, y+.15,img,3)
+        b[4] = buttonAttributes(self,text=key[4]).addImage(x+.043,y+.15,img,4)
+        b[5] = buttonAttributes(self,text=key[5]).addImage(x+.086,y+.15,img,5)
+        b[6] = buttonAttributes(self, text=key[6]).addImage(x, y + .3, img,6)
+        b[7] = buttonAttributes(self, text=key[7]).addImage(x + .043, y + .3, img,7)
+        b[8] = buttonAttributes(self, text=key[8]).addImage(x + .086, y + .3, img,8)
