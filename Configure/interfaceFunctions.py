@@ -40,7 +40,9 @@ def getDirectory(dirFrame):
 
 
 
-
+def OnButtonClick( button_id):
+     global key
+     key[button_id] = input()
 
 # function that calls next frame
 # def nextFrame():
@@ -50,6 +52,8 @@ def getDirectory(dirFrame):
 class buttonAttributes(tk.Button):
     def __init__(self, frameRef, **kwargs):
         tk.Button.__init__(self, master=frameRef, **kwargs)
+
+
 
     def baseButtons(self, rx, ry):
         self.config(padx=1, relief="solid", pady=1, fg="#97a4aa", bd=0, highlightthickness=0)
@@ -64,20 +68,16 @@ class buttonAttributes(tk.Button):
     def on_leave(self, e):
         self['bg'] = color["fBg"]
 
-    def addImage(self, r, c, photo,num):
+    def addImage(self, r, c, photo, num):
 
         self.configure(fg="white", activeforeground="white", image=photo, border=0, compound="center", bg="#595959", activebackground="#595959")
         #self.grid(row=r, column=c)
         self.image = photo
         self.place(width=60, height=60, relx=r, rely=c)
-        self.bind(self.OnButtonClick)
 
     def OnButtonClick(self, button_id):
-        print("Hello")
-        # global key
-        # key[button_id] = input()
-        # self.config(text = key[button_id])
-
+        key[button_id] = input()
+        self.config(text=key[button_id], bg=color["fBg"], relief="solid", highlightthickness=1, highlightbackground=color["hl"])
 
 
 #######################Key Button#########################################
@@ -128,12 +128,12 @@ class pageTwo(tk.Frame):
         x = .365
         y = .1
         #b1 = buttonAttributes(self, command = lambda: b1.OnButtonClick(1)).addImage(x, y,img,0)
-        b1 = buttonAttributes(self, command = lambda: b1.OnButtonClick(1)).addImage(x, y, img, 0)
-        b2 = buttonAttributes(self, command = lambda: b2.OnButtonClick(2)).addImage(x+.043, y,img,1)
-        b3 = buttonAttributes(self, command = lambda: b3.OnButtonClick(3)).addImage(x+.086, y,img,2)
-        b4 = buttonAttributes(self, command = lambda: b4.OnButtonClick(4)).addImage(x, y+.15,img,3)
-        b5 = buttonAttributes(self, command = lambda: b5.OnButtonClick(5)).addImage(x+.043,y+.15,img,4)
-        b6 = buttonAttributes(self, command = lambda: b6.OnButtonClick(6)).addImage(x+.086,y+.15,img,5)
-        b7 = buttonAttributes(self, command = lambda: b7.OnButtonClick(7)).addImage(x, y + .3, img,6)
-        b8 = buttonAttributes(self, command = lambda: b8.OnButtonClick(8)).addImage(x + .043, y + .3, img,7)
-        b9 = buttonAttributes(self, command = lambda: b9.OnButtonClick(9)).addImage(x + .086, y + .3, img,8)
+        b1 = buttonAttributes(self, command = lambda: OnButtonClick(0)).addImage(x, y, img, 0)
+        b2 = buttonAttributes(self, command = lambda: OnButtonClick(1)).addImage(x+.043, y,img,1)
+        b3 = buttonAttributes(self, command = lambda: OnButtonClick(2)).addImage(x+.086, y,img,2)
+        b4 = buttonAttributes(self, command = lambda: OnButtonClick(3)).addImage(x, y+.15,img,3)
+        b5 = buttonAttributes(self, command = lambda: OnButtonClick(4)).addImage(x+.043,y+.15,img,4)
+        b6 = buttonAttributes(self, command = lambda: OnButtonClick(5)).addImage(x+.086,y+.15,img,5)
+        b7 = buttonAttributes(self, command = lambda: OnButtonClick(6)).addImage(x, y + .3, img,6)
+        b8 = buttonAttributes(self, command = lambda: OnButtonClick(7)).addImage(x + .043, y + .3, img,7)
+        b9 = buttonAttributes(self, command = lambda: OnButtonClick(8)).addImage(x + .086, y + .3, img,8)
