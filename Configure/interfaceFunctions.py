@@ -40,20 +40,15 @@ def getDirectory(dirFrame):
 
 
 
-def OnButtonClick( button_id):
-     global key
-     key[button_id] = input()
-
-# function that calls next frame
-# def nextFrame():
-
 
 # Generic Button Class
 class buttonAttributes(tk.Button):
+    def OnButtonClick(self, button_id):
+        key[button_id] = input()
+        self.config(text=key[button_id], bg=color["fBg"], relief="solid", highlightthickness=1, highlightbackground=color["hl"])
+
     def __init__(self, frameRef, **kwargs):
         tk.Button.__init__(self, master=frameRef, **kwargs)
-
-
 
     def baseButtons(self, rx, ry):
         self.config(padx=1, relief="solid", pady=1, fg="#97a4aa", bd=0, highlightthickness=0)
@@ -76,8 +71,16 @@ class buttonAttributes(tk.Button):
         self.place(width=60, height=60, relx=r, rely=c)
 
     def OnButtonClick(self, button_id):
+        global key
         key[button_id] = input()
-        self.config(text=key[button_id], bg=color["fBg"], relief="solid", highlightthickness=1, highlightbackground=color["hl"])
+        print(key[button_id])
+
+
+
+
+
+
+
 
 
 #######################Key Button#########################################
@@ -116,6 +119,27 @@ class pageOne(tk.Frame):
 
 
 ########################Page Classes 2 #####################################
+# class pageTwo(tk.Frame):
+#     def __init__(self, frameRoot, **kwargs):
+#         root.geometry("600x450")
+#         root.resizable(False,False)
+#         tk.Frame.__init__(self, frameRoot, **kwargs)
+#         self.config(bg=color["fBg"], relief="solid", highlightthickness=1, highlightbackground=color["hl"])
+#         self.place(relwidth=3, relheight=.9, relx=-1, rely=.05)
+#
+#         img = PhotoImage(file="buttonPic.png")
+#         x = .365
+#         y = .1
+#         b1 = buttonAttributes(self, command = lambda: .OnButtonClick(0)).addImage(x, y, img, 0)
+#         # b2 = buttonAttributes(self, command = lambda: b2.OnButtonClick(1)).addImage(x+.043, y,img,1)
+#         # b3 = buttonAttributes(self, command = lambda: b3.OnButtonClick(2)).addImage(x+.086, y,img,2)
+#         # b4 = buttonAttributes(self, command = lambda: b4.OnButtonClick(3)).addImage(x, y+.15,img,3)
+#         # b5 = buttonAttributes(self, command = lambda: b5.OnButtonClick(4)).addImage(x+.043,y+.15,img,4)
+#         # b6 = buttonAttributes(self, command = lambda: b6.OnButtonClick(5)).addImage(x+.086,y+.15,img,5)
+#         # b7 = buttonAttributes(self, command = lambda: b7.OnButtonClick(6)).addImage(x, y + .3, img,6)
+#         # b8 = buttonAttributes(self, command = lambda: b8.OnButtonClick(7)).addImage(x + .043, y + .3, img,7)
+#         # b9 = buttonAttributes(self, command = lambda: b9.OnButtonClick(8)).addImage(x + .086, y + .3, img,8)
+
 class pageTwo(tk.Frame):
     def __init__(self, frameRoot, **kwargs):
         root.geometry("600x450")
@@ -124,16 +148,7 @@ class pageTwo(tk.Frame):
         self.config(bg=color["fBg"], relief="solid", highlightthickness=1, highlightbackground=color["hl"])
         self.place(relwidth=3, relheight=.9, relx=-1, rely=.05)
 
-        img = PhotoImage(file="buttonPic.png")
         x = .365
         y = .1
-        #b1 = buttonAttributes(self, command = lambda: b1.OnButtonClick(1)).addImage(x, y,img,0)
-        b1 = buttonAttributes(self, command = lambda: OnButtonClick(0)).addImage(x, y, img, 0)
-        b2 = buttonAttributes(self, command = lambda: OnButtonClick(1)).addImage(x+.043, y,img,1)
-        b3 = buttonAttributes(self, command = lambda: OnButtonClick(2)).addImage(x+.086, y,img,2)
-        b4 = buttonAttributes(self, command = lambda: OnButtonClick(3)).addImage(x, y+.15,img,3)
-        b5 = buttonAttributes(self, command = lambda: OnButtonClick(4)).addImage(x+.043,y+.15,img,4)
-        b6 = buttonAttributes(self, command = lambda: OnButtonClick(5)).addImage(x+.086,y+.15,img,5)
-        b7 = buttonAttributes(self, command = lambda: OnButtonClick(6)).addImage(x, y + .3, img,6)
-        b8 = buttonAttributes(self, command = lambda: OnButtonClick(7)).addImage(x + .043, y + .3, img,7)
-        b9 = buttonAttributes(self, command = lambda: OnButtonClick(8)).addImage(x + .086, y + .3, img,8)
+        img = PhotoImage(file="buttonPic.png")
+        b1 = buttonAttributes(self, command = lambda: buttonAttributes.OnButtonClick(b1,1)).addImage(x,y,img,0)
