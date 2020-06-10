@@ -38,6 +38,8 @@ def getDirectory(dirFrame):
         rely=.02)
     return qmkdir
 
+def makefile():
+    print("Fuck Off")
 
 
 def OnButtonClick(button_id):
@@ -65,11 +67,10 @@ class buttonAttributes(tk.Button):
     def on_leave(self, e):
         self['bg'] = color["fBg"]
 
-    def addImage(self, r, c, photo, num):
+    def addImage(self, r, c, photo):
         self.configure(fg="white", activeforeground="white", image=photo, border=0, compound="center", bg="#595959", activebackground="#595959")
-        #self.grid(row=r, column=c)
         self.image = photo
-        self.place(width=60, height=60, relx=r, rely=c)
+        self.place(width=100, height=60, relx=r, rely=c)
 
 
 #######################Key Button#########################################
@@ -118,6 +119,7 @@ class pageTwo(tk.Frame):
         self.config(bg=color["fBg"], relief="solid", highlightthickness=1, highlightbackground=color["hl"])
         self.place(relwidth=3, relheight=.9, relx=-1, rely=.05)
 
+        makeImg = PhotoImage(file="makeImg.png")
         img = PhotoImage(file="buttonPic.png")
         x = .365
         y = .1
@@ -134,17 +136,21 @@ class pageTwo(tk.Frame):
         ent9 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[8]).place(relx=x + .21, rely=y + .34)
 
 
-        b1 = buttonAttributes(self, text="1", command=lambda: OnButtonClick(0)).addImage(x, y, img, 0)
-        b2 = buttonAttributes(self, text="2", command=lambda: OnButtonClick(1)).addImage(x + .09, y, img, 1)
-        b3 = buttonAttributes(self, text="3", command=lambda: OnButtonClick(2)).addImage(x + .18, y, img, 2)
-        b4 = buttonAttributes(self, text="4", command=lambda: OnButtonClick(3)).addImage(x, y + .15, img, 3)
-        b5 = buttonAttributes(self, text="5", command=lambda: OnButtonClick(4)).addImage(x + .09, y + .15, img, 4)
-        b6 = buttonAttributes(self, text="6", command=lambda: OnButtonClick(5)).addImage(x + .18, y + .15, img, 5)
-        b7 = buttonAttributes(self, text="7", command=lambda: OnButtonClick(6)).addImage(x, y + .3, img, 6)
-        b8 = buttonAttributes(self, text="8", command=lambda: OnButtonClick(7)).addImage(x + .09, y + .3, img, 7)
-        b9 = buttonAttributes(self, text="9", command=lambda: OnButtonClick(8)).addImage(x + .18, y + .3, img, 8)
+        b1 = buttonAttributes(self, text="1", command=lambda: OnButtonClick(0)).addImage(x, y, img)
+        b2 = buttonAttributes(self, text="2", command=lambda: OnButtonClick(1)).addImage(x + .09, y, img)
+        b3 = buttonAttributes(self, text="3", command=lambda: OnButtonClick(2)).addImage(x + .18, y, img)
+        b4 = buttonAttributes(self, text="4", command=lambda: OnButtonClick(3)).addImage(x, y + .15, img)
+        b5 = buttonAttributes(self, text="5", command=lambda: OnButtonClick(4)).addImage(x + .09, y + .15, img)
+        b6 = buttonAttributes(self, text="6", command=lambda: OnButtonClick(5)).addImage(x + .18, y + .15, img)
+        b7 = buttonAttributes(self, text="7", command=lambda: OnButtonClick(6)).addImage(x, y + .3, img)
+        b8 = buttonAttributes(self, text="8", command=lambda: OnButtonClick(7)).addImage(x + .09, y + .3, img)
+        b9 = buttonAttributes(self, text="9", command=lambda: OnButtonClick(8)).addImage(x + .18, y + .3, img)
 
-        
+        makeButton = buttonAttributes(self, text="MAKE", command= makefile).addImage(.4, .6, makeImg)
+        flash = buttonAttributes(self, text="Flash", command= makefile).addImage(.55, .6, makeImg)
+
+
+
 # class pageTwo(tk.Frame):
 #     def __init__(self, frameRoot, **kwargs):
 #         root.geometry("600x450")
