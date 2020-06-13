@@ -8,6 +8,7 @@ import tkinter as tk
 from tkinter import filedialog, Text
 import os
 from miscDef import *
+import re
 
 # --------------------------------------------------------------------------------------------------
 
@@ -18,17 +19,12 @@ root.title("beesKeys Macro Editor")
 root.geometry("500x200")
 root.configure(background=color["root"])
 
-def read_stdout(stdout, queue):
-    while True:
-        queue.put(stdout.readline()) #This hangs when there is no IO
 
 # Function that stores user input for keymapping
 # os system to change directory to qmk_firmware folder etc
-def flashHex(path):
-    return
-def makeHex(path):
-    subprocess.run('make beesKeys:default', shell=False, cwd=path) #making hex file
 
+def makeHex(path):
+    subprocess.run('make beesKeys:all', shell=False, cwd=path)  # making hex file
 
 
 # function to check and allow user to select directory
@@ -42,17 +38,26 @@ def getDirectory(dirFrame):
         rely=.02)
     return qmkdir
 
+
+def capFile(path):
+    f1 = open(path + "/keyboards/beesKeys/keymaps/default/keymap.c", mode="r")
+    f2 = open(path + "/keyboards/beesKeys/keymaps/default/keymap2.c", mode="w")
+    for line in f1:
+        for i in range(len(key)):
+            if line.startswith("#define ") and remap[i] in line:
+                line = "#define " + key[i] + "\n"
+        f2.write(line)
+
+
 def OnButtonClick(button_id):
     key[button_id] = temp[button_id].get();
     print(key[button_id])
-
 
 
 # Generic Button Class
 class buttonAttributes(tk.Button):
     def __init__(self, frameRef, **kwargs):
         tk.Button.__init__(self, master=frameRef, **kwargs)
-
 
     def baseButtons(self, rx, ry):
         self.config(padx=1, relief="solid", pady=1, fg="#97a4aa", bd=0, highlightthickness=0)
@@ -68,7 +73,8 @@ class buttonAttributes(tk.Button):
         self['bg'] = color["fBg"]
 
     def addImage(self, r, c, photo):
-        self.configure(fg="white", activeforeground="white", image=photo, border=0, compound="center", bg="#595959", activebackground="#595959")
+        self.configure(fg="white", activeforeground="white", image=photo, border=0, compound="center", bg="#595959",
+                       activebackground="#595959")
         self.image = photo
         self.place(width=98, height=60, relx=r, rely=c)
 
@@ -104,17 +110,22 @@ class pageOne(tk.Frame):
         dirFrame = tk.LabelFrame(self, bg=color["hl"], relief="sunken", bd=1)
         dirFrame.place(relwidth=.25, height=28, relx=.4, rely=.2)
 
-        openDir = buttonAttributes(self, text="Select Folder: ", bg=color["fBg"], command=lambda: getDirectory(dirFrame)).baseButtons(.35, .2)
-        next = buttonAttributes(self, text="Next", bg=color["fBg"]).baseButtons(.55, .7,)
+        openDir = buttonAttributes(self, text="Select Folder: ", bg=color["fBg"],
+                                   command=lambda: getDirectory(dirFrame)).baseButtons(.35, .2)
+        next = buttonAttributes(self, text="Next", bg=color["fBg"]).baseButtons(.55, .7, )
 
-temp = [StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar()]
+
+temp = [StringVar(), StringVar(), StringVar(), StringVar(), StringVar(), StringVar(), StringVar(), StringVar(),
+        StringVar()]
+
+
 ########################Page Classes 2 #####################################
 class pageTwo(tk.Frame):
     global key
 
     def __init__(self, frameRoot, **kwargs):
         root.geometry("800x650")
-        root.resizable(False,False)
+        root.resizable(False, False)
         tk.Frame.__init__(self, frameRoot, **kwargs)
         self.config(bg=color["fBg"], relief="solid", highlightthickness=1, highlightbackground=color["hl"])
         self.place(relwidth=3, relheight=.9, relx=-1, rely=.05)
@@ -124,17 +135,15 @@ class pageTwo(tk.Frame):
         x = .365
         y = .1
 
-
-        ent1 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable= temp[0]).place(relx= x+.04, rely=y+.03)
-        ent2 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable= temp[1]).place(relx= x+.13, rely=y+.03)
-        ent3 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable= temp[2]).place(relx= x+.22, rely=y+.03)
+        ent1 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[0]).place(relx=x + .04, rely=y + .03)
+        ent2 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[1]).place(relx=x + .13, rely=y + .03)
+        ent3 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[2]).place(relx=x + .22, rely=y + .03)
         ent4 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[3]).place(relx=x + .04, rely=y + .19)
         ent5 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[4]).place(relx=x + .13, rely=y + .19)
         ent6 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[5]).place(relx=x + .22, rely=y + .19)
         ent7 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[6]).place(relx=x + .04, rely=y + .34)
         ent8 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[7]).place(relx=x + .13, rely=y + .34)
         ent9 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[8]).place(relx=x + .22, rely=y + .34)
-
 
         b1 = buttonAttributes(self, text="1", command=lambda: OnButtonClick(0)).addImage(x, y, img)
         b2 = buttonAttributes(self, text="2", command=lambda: OnButtonClick(1)).addImage(x + .09, y, img)
@@ -146,8 +155,5 @@ class pageTwo(tk.Frame):
         b8 = buttonAttributes(self, text="8", command=lambda: OnButtonClick(7)).addImage(x + .09, y + .3, img)
         b9 = buttonAttributes(self, text="9", command=lambda: OnButtonClick(8)).addImage(x + .18, y + .3, img)
 
-        makeButton = buttonAttributes(self, text="MAKE", command= lambda: makeHex(qmkdir)).addImage(.4, .6, makeImg)
-        #flash = buttonAttributes(self, text="FLASH", command= makeHex(qmkdir)).addImage(.55, .6, makeImg)
-
-
-
+        makeButton = buttonAttributes(self, text="MAKE", command=lambda: makeHex(qmkdir)).addImage(.4, .6, makeImg)
+        remap = buttonAttributes(self, text="REMAP", command=capFile(qmkdir)).addImage(.55, .6, makeImg)
