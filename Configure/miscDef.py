@@ -1,7 +1,7 @@
 # firmware folder name(subjected to change)
 firmware = 'qmk_firmware'
 # Global variable for path
-qmkdir = ''
+qmkdir = "C:/Users/Thiccresa/Documents/Projects/qmk_firmware"
 # Color definition
 # color = {
 #     "root": "#21292d",  # root back

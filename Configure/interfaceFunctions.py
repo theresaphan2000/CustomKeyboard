@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 import subprocess
+from subprocess import *
+import threading
+import queue
 from tkinter import *
 import tkinter as tk
 from tkinter import filedialog, Text
@@ -11,20 +14,21 @@ from miscDef import *
 
 # root used in interfaceVisuals.py
 root = tk.Tk()  # needed " think of it as a base'
-root.title("hello")
+root.title("beesKeys Macro Editor")
 root.geometry("500x200")
 root.configure(background=color["root"])
 
+def read_stdout(stdout, queue):
+    while True:
+        queue.put(stdout.readline()) #This hangs when there is no IO
 
 # Function that stores user input for keymapping
 # os system to change directory to qmk_firmware folder etc
-def makeHex(path):
-    # keyboardpath = path + '\\keyboards\\Tmacro
-    subprocess.run('ls', shell=True,
-                   cwd=path)  # list directory, use shell, change current working directory to path give
-    # run vs open vs check_call??
-    subprocess.run('make Tmacro:default', shell=True)  # make hexfile
+def flashHex(path):
     return
+def makeHex(path):
+    subprocess.run('make beesKeys:default', shell=False, cwd=path) #making hex file
+
 
 
 # function to check and allow user to select directory
@@ -37,10 +41,6 @@ def getDirectory(dirFrame):
         relx=.05,
         rely=.02)
     return qmkdir
-
-def makefile():
-    print("Fuck Off")
-
 
 def OnButtonClick(button_id):
     key[button_id] = temp[button_id].get();
@@ -70,7 +70,7 @@ class buttonAttributes(tk.Button):
     def addImage(self, r, c, photo):
         self.configure(fg="white", activeforeground="white", image=photo, border=0, compound="center", bg="#595959", activebackground="#595959")
         self.image = photo
-        self.place(width=100, height=60, relx=r, rely=c)
+        self.place(width=98, height=60, relx=r, rely=c)
 
 
 #######################Key Button#########################################
@@ -125,15 +125,15 @@ class pageTwo(tk.Frame):
         y = .1
 
 
-        ent1 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable= temp[0]).place(relx= x+.03, rely=y+.03)
-        ent2 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable= temp[1]).place(relx= x+.12, rely=y+.03)
-        ent3 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable= temp[2]).place(relx= x+.21, rely=y+.03)
-        ent4 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[3]).place(relx=x + .03, rely=y + .19)
-        ent5 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[4]).place(relx=x + .12, rely=y + .19)
-        ent6 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[5]).place(relx=x + .21, rely=y + .19)
-        ent7 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[6]).place(relx=x + .03, rely=y + .34)
-        ent8 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[7]).place(relx=x + .12, rely=y + .34)
-        ent9 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[8]).place(relx=x + .21, rely=y + .34)
+        ent1 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable= temp[0]).place(relx= x+.04, rely=y+.03)
+        ent2 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable= temp[1]).place(relx= x+.13, rely=y+.03)
+        ent3 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable= temp[2]).place(relx= x+.22, rely=y+.03)
+        ent4 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[3]).place(relx=x + .04, rely=y + .19)
+        ent5 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[4]).place(relx=x + .13, rely=y + .19)
+        ent6 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[5]).place(relx=x + .22, rely=y + .19)
+        ent7 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[6]).place(relx=x + .04, rely=y + .34)
+        ent8 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[7]).place(relx=x + .13, rely=y + .34)
+        ent9 = tk.Entry(self, relief=FLAT, state=NORMAL, textvariable=temp[8]).place(relx=x + .22, rely=y + .34)
 
 
         b1 = buttonAttributes(self, text="1", command=lambda: OnButtonClick(0)).addImage(x, y, img)
@@ -146,20 +146,8 @@ class pageTwo(tk.Frame):
         b8 = buttonAttributes(self, text="8", command=lambda: OnButtonClick(7)).addImage(x + .09, y + .3, img)
         b9 = buttonAttributes(self, text="9", command=lambda: OnButtonClick(8)).addImage(x + .18, y + .3, img)
 
-        makeButton = buttonAttributes(self, text="MAKE", command= makefile).addImage(.4, .6, makeImg)
-        flash = buttonAttributes(self, text="Flash", command= makefile).addImage(.55, .6, makeImg)
+        makeButton = buttonAttributes(self, text="MAKE", command= lambda: makeHex(qmkdir)).addImage(.4, .6, makeImg)
+        #flash = buttonAttributes(self, text="FLASH", command= makeHex(qmkdir)).addImage(.55, .6, makeImg)
 
 
 
-# class pageTwo(tk.Frame):
-#     def __init__(self, frameRoot, **kwargs):
-#         root.geometry("600x450")
-#         root.resizable(False,False)
-#         tk.Frame.__init__(self, frameRoot, **kwargs)
-#         self.config(bg=color["fBg"], relief="solid", highlightthickness=1, highlightbackground=color["hl"])
-#         self.place(relwidth=3, relheight=.9, relx=-1, rely=.05)
-#
-#         x = .365
-#         y = .1
-#         img = PhotoImage(file="buttonPic.png")
-#         b1 = buttonAttributes(self, command = lambda: buttonAttributes.OnButtonClick(b1,1)).addImage(x,y,img,0)
