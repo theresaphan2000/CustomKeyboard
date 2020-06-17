@@ -40,17 +40,21 @@ def getDirectory(dirFrame):
 
 
 def capFile(path):
+    remap = ["key1", "key2", "key3", "key4", "key5", "key6", "key7", "key8"]
+
+    global key
+
     f1 = open(path + "/keyboards/beesKeys/keymaps/default/keymap.c", mode="r")
     f2 = open(path + "/keyboards/beesKeys/keymaps/default/keymap2.c", mode="w")
     for line in f1:
         for i in range(len(key)):
             if line.startswith("#define ") and remap[i] in line:
-                line = "#define " + key[i] + "\n"
+                line = "#define " + remap[i] + " = " + '"' + key[i] + '"' + "\n"
         f2.write(line)
 
 
 def OnButtonClick(button_id):
-    key[button_id] = temp[button_id].get();
+    key[button_id] = temp[button_id].get()
     print(key[button_id])
 
 
@@ -156,4 +160,4 @@ class pageTwo(tk.Frame):
         b9 = buttonAttributes(self, text="9", command=lambda: OnButtonClick(8)).addImage(x + .18, y + .3, img)
 
         makeButton = buttonAttributes(self, text="MAKE", command=lambda: makeHex(qmkdir)).addImage(.4, .6, makeImg)
-        remap = buttonAttributes(self, text="REMAP", command=capFile(qmkdir)).addImage(.55, .6, makeImg)
+        remap = buttonAttributes(self, text="REMAP", command= lambda: capFile(qmkdir)).addImage(.55, .6, makeImg)
