@@ -10,15 +10,15 @@ NOTE: The USBaspLoader is an open source bootloader that allows us to reprogram 
 - [x] Researching which compiler to use for programming the ATMega microprocessors
 
 - [x] referencing the code from qmk_firmware_
-- [ ] Create a working prototype for the testing code
-- [ ] Iterate the code to work for multiple key switches
+- [X] Create a working prototype for the testing code
+- [X] Iterate the code to work for multiple key switches
 - [ ] Design a custom PCB for the phase two prototype
-- [ ] Test the code and circuitry on the second prototype
+- [X] Test the code and circuitry on the second prototype
 - [x] Learn to code python
 - [x] learn to make a simple python app
-- [ ] Develop a prototype GUI
-- [ ] Research ways to integrate the python application with the AVR programming
-- [ ] Develop a proper over UI design for the application
+- [X] Develop a prototype GUI
+- [X] Research ways to integrate the python application with the AVR programming
+- [X] Develop a proper over UI design for the application
 - [ ] ...
 
 ###### Details about this repo:
